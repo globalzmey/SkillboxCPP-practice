@@ -1,0 +1,9 @@
+*.exe
+*.obj
+*.log
+*.cbp
+**/.vscode
+**/.cache
+**/build/
+**/.idea
+**/cmake-build-debug

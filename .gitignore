@@ -1,9 +1,9 @@
-*.exe
+# specific to CodeBlocks IDE
+*.layout
+*.depend
 *.obj
 *.log
 *.cbp
-**/.vscode
-**/.cache
-**/build/
-**/.idea
-**/cmake-build-debug
+# generated directories
+bin/
+obj/

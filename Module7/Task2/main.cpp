@@ -27,10 +27,7 @@ int main() {
         } while (milk <= 0);
     }
 
-    while (true) {
-        if (water < AMERICANO_WATER || (water < LATTE_WATER && milk < LATTE_MILK)) {
-            break;
-        }
+    while (water > AMERICANO_WATER || (water > LATTE_WATER && milk > LATTE_MILK)) {
 
         int choice;
         std::cout << "Выберите напиток (1 — американо, 2 — латте): ";

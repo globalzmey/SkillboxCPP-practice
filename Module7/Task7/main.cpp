@@ -26,7 +26,7 @@ int main() {
         hour++;
         N *= 2;
         N -= fagPower;
-        fagPower--;
+        fagPower -= X;
 
         if (N > 0) {
             std::cout << "После " << hour << " часа бактерий осталось " << N << "\n";

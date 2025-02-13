@@ -1,52 +1,59 @@
 #include <iostream>
 #include <string>
 
+bool isValidPart(std::string part) {
+    if (part.length() == 0 || part.length() > 3) {
+        return false;
+    }
+
+    if (part[0] == '0' && part.length() > 1) {
+        return false;
+    }
+
+    int num = 0;
+    for (int i = 0; i < part.length(); i++) {
+        if (part[i] < '0' || part[i] > '9') {
+            return false;
+        }
+        num = num * 10 + (part[i] - '0');
+    }
+
+    return num >= 0 && num <= 255;
+}
+
+bool isValidIP(std::string ip) {
+    std::string part;
+    int count = 0;
+    
+    for (int i = 0; i < ip.length(); i++) {
+        if (ip[i] == '.') {
+            if (!isValidPart(part)) {
+                return false;
+            }
+            count++;
+            part = "";
+        } else {
+            part += ip[i];
+        }
+    }
+
+    if (!isValidPart(part)) {
+        return false;
+    }
+    count++;
+
+    return count == 4;
+}
+
 int main() {
     std::string ip;
     std::cout << "Input IP-address: ";
     std::cin >> ip;
 
-    int numCount = 0;
-    int currentNum = 0;
-    int dotCount = 0;
-    bool hasLeadingZero = false;
-    bool isValid = true;
-
-    for (size_t i = 0; i < ip.length(); ++i) {
-        char c = ip[i];
-
-        if (c == '.') {
-            if (i == 0 || i == ip.length() - 1 || hasLeadingZero || currentNum > 255) {
-                isValid = false;
-                break;
-            }
-            numCount++;
-            currentNum = 0;
-            dotCount++;
-            hasLeadingZero = false;
-        } else if (c >= '0' && c <= '9') {
-            if (currentNum == 0 && i > 0 && ip[i - 1] == '0') {
-                hasLeadingZero = true;
-            }
-            currentNum = currentNum * 10 + (c - '0');
-            if (currentNum > 255) {
-                isValid = false;
-                break;
-            }
-        } else {
-            isValid = false;
-            break;
-        }
-    }
-
-    if (numCount != 3 || dotCount != 3 || currentNum > 255 || hasLeadingZero) {
-        isValid = false;
-    }
-
-    if (isValid) {
-        std::cout << "Valid\n";
+    if (isValidIP(ip)) {
+        std::cout << "Valid" << std::endl;
     } else {
-        std::cout << "Invalid\n";
+        std::cout << "Invalid" << std::endl;
     }
 
     return 0;

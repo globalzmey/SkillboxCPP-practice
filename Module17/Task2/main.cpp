@@ -1,30 +1,30 @@
 #include <iostream>
 
-void reverseArray(int *array, int arraySize) {
-    int arrayReverse[arraySize];
-    int j = arraySize - 1;
-    for (int i = 0; i < arraySize; i++) {
-        arrayReverse[i] = array[j];
-        j--;
+void reverseArray(int* array) {
+    if (array == NULL) {
+        return;
     }
 
-    for (int i = 0; i < arraySize; i++) {
-        array[i] = arrayReverse[i];
-    }
+    const int size = 10;
 
+    for (int i = 0; i < size / 2; ++i)
+    {
+        int temp = array[i];
+        array[i] = array[size - i - 1];
+        array[size - i - 1] = temp;
+    }
 }
 
 int main() {
     int array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    int arraySize = sizeof(array) / sizeof(array[0]);
 
-    reverseArray(array, arraySize);
+    reverseArray(array);
 
-    for (int i = 0; i < arraySize; i++) {
+    for (int i = 0; i < 10; i++) {
         std::cout << array[i] << " ";
     }
 
-    std::cout << "\n";
+    std::cout << std::endl;
 
     return 0;
 
